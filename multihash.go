@@ -1,5 +1,13 @@
 package multihash
 
+/*
+#cgo LDFLAGS: /Users/johan/golang/src/go-rust-multihash/rustlib/target/debug/librustlib.a /usr/local/Cellar/libsodium/1.0.10/lib/libsodium.a
+#include <stdint.h>
+#include <stdio.h>
+extern int32_t double_input(int32_t input);
+*/
+import "C"
+
 import (
 	"encoding/hex"
 	"errors"
@@ -23,6 +31,10 @@ type ErrInconsistentLen struct {
 
 func (e ErrInconsistentLen) Error() string {
 	return fmt.Sprintf("multihash length inconsistent: %v", e.dm)
+}
+
+func Hello() {
+	fmt.Println("Hello from rust multihash!")
 }
 
 // constants

@@ -1,9 +1,19 @@
 package multihash
 
+/*
+#cgo LDFLAGS: /Users/johan/golang/src/go-rust-multihash/rustlib/target/debug/librustlib.a /usr/local/Cellar/libsodium/1.0.10/lib/libsodium.a
+#include <stdint.h>
+#include <stdio.h>
+extern int32_t double_input(int32_t input);
+extern int32_t sha256(char input[], uint32_t length);
+*/
+import "C"
+
 import (
 	"crypto/sha1"
 	"crypto/sha256"
 	"crypto/sha512"
+	"encoding/hex"
 	"errors"
 	"fmt"
 
@@ -13,6 +23,7 @@ import (
 var ErrSumNotSupported = errors.New("Function not implemented. Complain to lib maintainer.")
 
 func Sum(data []byte, code int, length int) (Multihash, error) {
+	C.sha256(C.CString(string(data)), C.uint32_t((len(data))))
 	m := Multihash{}
 	err := error(nil)
 	if !ValidCode(code) {
@@ -55,6 +66,8 @@ func sumSHA1(data []byte) []byte {
 
 func sumSHA256(data []byte) []byte {
 	a := sha256.Sum256(data)
+	s := hex.EncodeToString(a[0:32])
+	fmt.Println("Go hash " + s)
 	return a[0:32]
 }
 

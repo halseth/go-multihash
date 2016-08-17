@@ -1,0 +1,1 @@
+{"rustc":9862624237538178097,"target":8140300105386309153,"profile":15288148974678605576,"local":{"variant":"Precalculated","fields":["0.0.12"]},"features":"Some([\"default\", \"serde\"])","deps":[["libc v0.2.14",5819917367490746803],["libsodium-sys v0.0.12",3237134007686250414],["serde v0.7.14",16473252020629747454]],"rustflags":[]}
